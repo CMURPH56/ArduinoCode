@@ -17,12 +17,14 @@ MFRC522 mfrc522(SS_PIN, RST_PIN);   // Create MFRC522 instance.
 
 
 // Motor Pins
-int in1Pin = 4;
-int in2Pin = 3;
-int in3Pin = 2;
-int in4Pin = 1;
+int in1Pin = 5;
+int in2Pin = 4;
+int in3Pin = 3;
+int in4Pin = 2;
 
-Stepper motor(512, in1Pin, in2Pin, in3Pin, in4Pin);
+const int stepsPerRevolution = 200; 
+
+Stepper motor(stepsPerRevolution, in1Pin, in2Pin, in3Pin, in4Pin);
 
 void setup() 
 {
@@ -38,13 +40,13 @@ void setup()
   pinMode(in2Pin, OUTPUT);
   pinMode(in3Pin, OUTPUT);
   pinMode(in4Pin, OUTPUT);
-//  motor.setSpeed(20);
+  motor.setSpeed(60);
 
   
 }
 void loop() 
 {
-//  motor.step(3200);
+//  motor.step(stepsPerRevolution);
   checkAuth();
 } 
 
