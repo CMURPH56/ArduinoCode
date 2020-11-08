@@ -23,6 +23,7 @@ int in3Pin = 3;
 int in4Pin = 2;
 
 const int stepsPerRevolution = 200; 
+const int stepsPerHalfRevolution = 100;
 
 Stepper motor(stepsPerRevolution, in1Pin, in2Pin, in3Pin, in4Pin);
 
@@ -40,13 +41,12 @@ void setup()
   pinMode(in2Pin, OUTPUT);
   pinMode(in3Pin, OUTPUT);
   pinMode(in4Pin, OUTPUT);
-  motor.setSpeed(60);
+  motor.setSpeed(120);
 
   
 }
 void loop() 
 {
-//  motor.step(stepsPerRevolution);
   checkAuth();
 } 
 
@@ -82,10 +82,23 @@ void checkAuth()
   {
     Serial.println("Authorized access");
     Serial.println();
+    rotateMotor(true);
   }
  
  else   {
     Serial.println(" Access denied");
     delay(3000);
+  }
+}
+
+void rotateMotor(bool runCode)
+{
+  while(runCode)
+  {
+        motor.step(stepsPerRevolution);
+        delay(1000);
+        motor.step(-stepsPerRevolution);
+        delay(1000);
+        runCode = false;
   }
 }
