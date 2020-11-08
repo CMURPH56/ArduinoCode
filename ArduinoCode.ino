@@ -24,7 +24,12 @@ void setup()
 }
 void loop() 
 {
-  // Look for new cards
+ checkAuth();
+} 
+
+void checkAuth()
+{
+   // Look for new cards
   if ( ! mfrc522.PICC_IsNewCardPresent()) 
   {
     return;
@@ -58,4 +63,4 @@ void loop()
     Serial.println(" Access denied");
     delay(3000);
   }
-} 
+}
