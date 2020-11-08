@@ -8,24 +8,47 @@
  
 #include <SPI.h>
 #include <MFRC522.h>
- 
+#include <Stepper.h>
+
+// RFID Pins
 #define SS_PIN 10
 #define RST_PIN 9
 MFRC522 mfrc522(SS_PIN, RST_PIN);   // Create MFRC522 instance.
- 
+
+
+// Motor Pins
+int in1Pin = 4;
+int in2Pin = 3;
+int in3Pin = 2;
+int in4Pin = 1;
+
+Stepper motor(512, in1Pin, in2Pin, in3Pin, in4Pin);
+
 void setup() 
 {
+  // RFID setup
   Serial.begin(9600);   // Initiate a serial communication
   SPI.begin();      // Initiate  SPI bus
   mfrc522.PCD_Init();   // Initiate MFRC522
   Serial.println("Approximate your card to the reader...");
   Serial.println();
 
+  // Motor Setup
+  pinMode(in1Pin, OUTPUT);
+  pinMode(in2Pin, OUTPUT);
+  pinMode(in3Pin, OUTPUT);
+  pinMode(in4Pin, OUTPUT);
+//  motor.setSpeed(20);
+
+  
 }
 void loop() 
 {
- checkAuth();
+//  motor.step(3200);
+  checkAuth();
 } 
+
+
 
 void checkAuth()
 {
