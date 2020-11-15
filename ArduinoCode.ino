@@ -23,7 +23,7 @@ int in3Pin = 3;
 int in4Pin = 2;
 
 const int stepsPerRevolution = 200; 
-const int stepsPerHalfRevolution = 100;
+
 
 Stepper motor(stepsPerRevolution, in1Pin, in2Pin, in3Pin, in4Pin);
 
@@ -41,7 +41,7 @@ void setup()
   pinMode(in2Pin, OUTPUT);
   pinMode(in3Pin, OUTPUT);
   pinMode(in4Pin, OUTPUT);
-  motor.setSpeed(120);
+  motor.setSpeed(60);
 
   
 }
@@ -95,10 +95,10 @@ void rotateMotor(bool runCode)
 {
   while(runCode)
   {
-        motor.step(stepsPerRevolution);
-        delay(1000);
-        motor.step(-stepsPerRevolution);
-        delay(1000);
+        motor.step(stepsPerRevolution * 5);
+        delay(500);
+        motor.step(-stepsPerRevolution * 5);
+        delay(500);
         runCode = false;
   }
 }
